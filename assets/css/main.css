@@ -37,11 +37,12 @@ img {
 }
 
 .flex { display: flex; align-items: center; }
+.flex-col { flex-direction: column; }
 .justify-center { justify-content: center; }
 .justify-between { justify-content: space-between; }
 
 .header_top {
-    font-size: .6875rem;
+    font-size: .75rem;
     padding-block: 8px;
     border-bottom: var(--border-template);
     color: rgb(var(--gray-clr));
@@ -72,10 +73,81 @@ img {
             &::before { left: -15px; }
             &::after { right: -15px; }
 
-            select {
-                appearance: unset;
-                border: none;
-                outline: none;
+            .lang {
+                position: relative;
+
+                > span {
+                    display: inline-flex;
+                    align-items: center;
+                    column-gap: 4px;
+                    cursor: pointer;
+
+                    .chevron {
+                        font-size: 8px;
+                    }
+                }
+
+                > span:hover + .lang_menu {
+                    display: block;
+                    top: calc(100% + 4px);
+                    opacity: 1;
+                    visibility: visible;
+                }
+
+                .lang_menu {
+                    position: absolute;
+                    top: 100%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: max-content;
+                    padding: 8px 6px;
+                    background-color: white;
+                    border: 1px solid rgb(var(--border-clr));
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: 250ms ease;
+
+                    > span {
+                        display: block;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .icons {
+            column-gap: 4px;
+
+            li {
+                a {
+                    display: inline-flex;
+                    align-items: center;
+                    width: 26px;
+                    height: 26px;
+                    border-radius: 50%;
+                    transition: 250ms ease;
+
+                    i {
+                        font-size: 13px;
+                    }
+                    
+                    &:hover {
+                        background-color: rgb(var(--icon-bg, --gray-clr) / 85%);
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+header {
+    .middle {
+        padding-block: 27px;
+
+        .middle_right {
+            .search_area {
+
             }
         }
     }
