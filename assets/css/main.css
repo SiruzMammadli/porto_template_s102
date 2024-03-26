@@ -3,6 +3,7 @@
   --border-template: 1px solid rgb(var(--border-clr));
   --gray-clr: 119 119 119;
   --search-bg: 244 244 244;
+  --primary-clr: 0 136 204;
 }
 
 * {
@@ -161,6 +162,8 @@ img {
 }
 
 header {
+  z-index: 1000;
+
   .middle {
     padding-block: 27px;
 
@@ -230,6 +233,118 @@ header {
                 font-size: 1.125rem;
                 font-weight: bold;
             }
+        }
+      }
+    }
+  }
+}
+
+.bottom {
+  --ps: 0;
+  --before-status: '';
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+
+  .navigation > li > a, .offers > a {
+    font-weight: 600;
+    font-size: .75rem;
+    display: inline-flex;
+    align-items: center;
+    text-transform: uppercase;
+    column-gap: 4px;
+    padding-block: 16px;
+    padding-inline-start: var(--ps);
+    color: #555;
+    transition: color 200ms ease;
+    position: relative;
+
+    &:is(.active, :hover) {
+      color: rgb(var(--primary-clr));
+
+      &::before {
+        opacity: 1;
+      }
+    }
+
+    &::before {
+      content: var(--before-status);
+      position: absolute;
+      top: 0;
+      inset-inline: 0;
+      background-color: rgb(var(--primary-clr));
+      height: 2px;
+      opacity: 0;
+      transition: opacity 200ms ease;
+    }
+
+    .chevron {
+      font-size: 8px;
+    }
+  }
+
+  .navigation {
+    column-gap: 32px;
+
+    li {
+      position: relative;
+
+      &:hover {
+        .drop_menuu {
+          opacity: 1;
+          visibility: visible;
+          scale: 1;
+        }
+      }
+
+      .drop_menuu {
+        --drop-width: 600px;
+        --column-count: 3;
+        background-color: white;
+        position: absolute;
+        box-shadow: 0 0 10px 1px rgb(0 0 0 / 10%);
+        width: var(--drop-width);
+        display: grid;
+        grid-template-columns: repeat(var(--column-count), 1fr);
+        padding: 10px;
+        opacity: 0;
+        visibility: hidden;
+        scale: .9;
+        transition: 250ms;
+        transform-origin: left top;
+
+        > div {
+          text-transform: uppercase;
+          
+          &:not(:last-child) {
+            padding: 15px 10px 0;
+          }
+
+          ul {
+            li {
+              font-size: .75rem;
+              
+              &.title {
+                padding-bottom: 11px;
+              }
+
+              > a {
+                display: block;
+                padding: 8px 8px 8px 0;
+                color: rgb(var(--gray-clr));
+
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
+          }
+
+          > img {
+            width: 100%;
+            height: 100%;
+          }
         }
       }
     }
